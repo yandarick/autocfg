@@ -1,0 +1,40 @@
+! - Add interface Cfg
+{% for i in df.index %}
+{%if df.at[i,"MODE"] == "ACCESS" %}
+interface {{ df.at[i,"INTERFACE"] }}
+ description {{ df.at[i,"DESCRIPTION"] }}
+ switchport
+ switchport mode access
+ switchport nonegotiate
+ switchport access vlan {{ df.at[i,"VLAN"] }}
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+{% elif df.at[i,"MODE"] == "SHUTDOWN"%}
+interface {{ df.at[i,"INTERFACE"] }}
+ description (#SHUTDOWN#)
+ shutdown
+{% endif %}
+{% endfor %}
+
+{#
+! - Add interface Cfg
+{% for i in df.index %}
+{%if df.at[i,"MODE"] == "ACCESS" %}
+default interface {{ df.at[i,"INTERFACE"] }}
+interface {{ df.at[i,"INTERFACE"] }}
+ description {{ df.at[i,"DESCRIPTION"] }}
+ switchport
+ switchport mode access
+ switchport nonegotiate
+ switchport access vlan {{ df.at[i,"VLAN"] }}
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+{% elif df.at[i,"MODE"] == "SHUTDOWN"%}
+default interface {{ df.at[i,"INTERFACE"] }}
+interface {{ df.at[i,"INTERFACE"] }}
+ description (#SHUTDOWN#)
+ shutdown
+{% endif %}
+{% endfor %}#}

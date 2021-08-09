@@ -1,0 +1,56 @@
+stages:
+  - install
+  - gencfg
+  - diffcfg
+  - pushcfg
+  - backcfg
+
+cache: # 大坑
+  paths:
+    - precfg
+
+install:
+  stage: install
+  only:
+    variables:
+      - $install == "true"
+  script:
+    - pip3.9 install -r requirements.txt
+  tags:
+    - getcfg
+
+gencfg:
+  stage: gencfg
+  script:
+    - python3.9 gencfg.py
+  tags:
+    - getcfg
+
+
+diffcfg:
+  stage: diffcfg
+  script:
+    - python3.9 diffcfg.py
+  tags:
+    - getcfg
+
+pushcfg:
+  stage: pushcfg
+  script:
+    - python3.9 pushcfg2.py
+  tags:
+    - getcfg
+
+
+bakcfg:
+  stage: backcfg
+  script:
+    - python3.9 getcfg.py
+  tags:
+    - getcfg
+  artifacts:
+    name: "${CI_BUILD_NAME}"
+    when: always
+    paths:
+      - runcfg/
+    expire_in: 1 week

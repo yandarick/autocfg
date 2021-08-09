@@ -1,0 +1,6 @@
+ios:
+  platform: ios
+  username: cisco
+  password: cisco
+  data:
+        vendor: cisco

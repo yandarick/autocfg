@@ -1,0 +1,4 @@
+sw1:
+    hostname: 172.22.72.4
+    groups:
+        - ios

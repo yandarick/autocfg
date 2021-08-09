@@ -1,0 +1,15 @@
+﻿pandas
+hvac
+nornir
+nornir-jinja2
+nornir_napalm
+nornir-netmiko
+nornir-utils
+cffi
+cryptography
+ncclient
+napalm
+netmiko
+napalm-ce
+xlrd==1.2.0
+openpyxl
